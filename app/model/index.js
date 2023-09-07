@@ -4,7 +4,7 @@ const models = require('./models')
 const sequelize = new Sequelize(DB_CONN)
 const model = {}
 Object.keys(models).forEach((item) => {
-  //   console.log(models[item])
+  // console.log(models)
   const tempModel = sequelize.define(item, models[item], {
     freezeTableName: true,
     tableName: (DB_PREFIX + item).toLowerCase(),
@@ -15,7 +15,7 @@ Object.keys(models).forEach((item) => {
   //   console.log(tempModel)
   model[item] = tempModel
 })
-// sequelize.sync()
+sequelize.sync()
 console.log('[INFO] model init success')
 
 module.exports = model
