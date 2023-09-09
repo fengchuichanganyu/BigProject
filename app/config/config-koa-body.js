@@ -1,16 +1,9 @@
 const path = require('path')
-const fs = require('fs')
+
+const { makeDir } = global.tool
 
 const tempDir = path.resolve(process.cwd(), './tmp')
-console.log(tempDir)
-// 检查临时文件夹是否存在，若不存在则新建
-fs.access(tempDir, (err) => {
-  if (err) {
-    fs.mkdir(tempDir, { recursive: true }, (err) => {
-      if (err) throw err
-    })
-  }
-})
+makeDir(tempDir)
 
 module.exports = {
   multipart: true,
@@ -28,6 +21,6 @@ module.exports = {
     keepExtensions: false,
   },
   onError(_, ctx) {
-    ctx.throw(411, '文件超过限制大小！')
+    ctx.throw(413, '文件超过限制大小！')
   },
 }
