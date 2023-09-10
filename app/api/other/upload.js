@@ -48,15 +48,19 @@ const calcSavePath = (hash, fileExt) => {
     hash.substring(0, 2)
   )
   const savePath = path.resolve(saveDir, hash.substring(2) + fileExt)
-  const returnPath = savePath.replace(rootPath + '/static', '')
-  console.log(saveDir, saveFile, returnPath)
+  const staticPath = '/static/'
+  const otherPath = rootPath + staticPath.replace(/\//g, '\\')
+  console.log(otherPath)
+  const returnPath = savePath.replace(otherPath, '')
+  console.log(saveDir, savePath, returnPath)
   return [saveDir, savePath, returnPath]
 }
 const saveFile = (ctx, file) => {
   // console.log(file)
   const { path, hash } = file
+  // console.log(path)
   const fileExt = calcFileExt(path)
-  console.log(fileExt)
+  // console.log(fileExt)
   if (!fileExt) ctx.throw(415, '仅支持 png/jpg/gif/bmp 等图片文件格式')
   const [saveDir, savePath, returnPath] = calcSavePath(hash, fileExt)
   return new Promise((resolve, reject) => {
