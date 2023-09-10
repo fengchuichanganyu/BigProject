@@ -49,7 +49,7 @@ const calcSavePath = (hash, fileExt) => {
   )
   const savePath = path.resolve(saveDir, hash.substring(2) + fileExt)
   const returnPath = savePath.replace(rootPath + '/static', '')
-  // console.log(saveDir, saveFile, returnPath)
+  console.log(saveDir, saveFile, returnPath)
   return [saveDir, savePath, returnPath]
 }
 const saveFile = (ctx, file) => {
