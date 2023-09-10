@@ -11,7 +11,7 @@ Object.keys(models).forEach((item) => {
     timestamps: false,
   })
 })
-console.log(sequelize)
+// console.log(sequelize)
 sequelize.sync()
 console.log('[INFO] model init success')
 

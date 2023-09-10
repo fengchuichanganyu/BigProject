@@ -16,7 +16,7 @@ const getJSFile = (filePath) => {
   const JSFile = []
   // console.log(srcPath)
   const result = fs.readdirSync(srcPath)
-  console.log(result)
+  // console.log(result)
   result.forEach((r) => {
     const JSFileName = r.split('.')[0]
     JSFileName && JSFile.push(JSFileName)
