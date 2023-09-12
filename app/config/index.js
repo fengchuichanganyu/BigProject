@@ -27,6 +27,8 @@ const APP_HOST = {
 }
 // 项目接口前缀
 const API_PREFIX = '/api/v1/'
+// 分页列表默认每页条数
+const PAGE_SIZE = 10
 
 // 数据库名称，用户名，密码
 const DB_NAME = 'BigProject'
@@ -41,4 +43,5 @@ module.exports = {
   DB_PASSWORD,
   APP_HOST,
   API_PREFIX,
+  PAGE_SIZE,
 }

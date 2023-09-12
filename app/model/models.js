@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const { STRING, INTEGER, TEXT, DATE, NOW } = Sequelize
+const { STRING, INTEGER, TEXT } = Sequelize
 const privateTypes = {
   Mobile: {
     type: INTEGER,
@@ -19,8 +19,12 @@ const privateTypes = {
       isEmail: true,
     },
   },
-  Date: { type: DATE, defaultValue: NOW },
+  Date: {
+    type: Sequelize.DATE, // 数据类型为日期/时间
+    defaultValue: Sequelize.NOW, // 设置默认值为当前时间
+  },
 }
+
 module.exports = {
   // 文章表
   Article: {

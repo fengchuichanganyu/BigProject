@@ -3,6 +3,11 @@ module.exports = {
     return params
   },
   post(params, ctx) {
+    // console.log(params)
+    if (!Object.keys(params).includes('channel_id')) {
+      ctx.throw(410, '栏目ID不能为空')
+    }
+    // console.log(params)
     return params
   },
   get(params, ctx, id) {

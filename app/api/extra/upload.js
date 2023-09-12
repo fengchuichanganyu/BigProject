@@ -52,7 +52,7 @@ const calcSavePath = (hash, fileExt) => {
   const otherPath = rootPath + staticPath.replace(/\//g, '\\')
   console.log(otherPath)
   const returnPath = savePath.replace(otherPath, '')
-  console.log(saveDir, savePath, returnPath)
+  // console.log(saveDir, savePath, returnPath)
   return [saveDir, savePath, returnPath]
 }
 const saveFile = (ctx, file) => {

@@ -62,13 +62,14 @@ router.all(API_PREFIX + '*', async (ctx, next) => {
   if (errPath) ctx.throw(400, '请求路径不支持')
   // 根据请求计算内置请求方法
   const reqMethod = calcMethodAndCheckUrl(reqApiName, reqId, ctx)
+  // console.log(reqMethod, reqApiName, reqId, RESTFulModel)
+
   if (extraAPI.includes(reqApiName)) {
     // 扩展接口直接调用扩展文件并执行
     await require(':@/api/extra/' + reqApiName)(ctx, next)
   } else if (Object.keys(RESTFulModel).includes(reqApiName)) {
     // 标准 RESTFul 查询
     const reqModelName = RESTFulModel[reqApiName]
-    // console.log(reqModelName, reqMethod, reqApiName, reqId)
     await core(ctx, reqModelName, reqMethod, reqApiName, reqId, next)
   } else {
     ctx.throw(404)
