@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('Sequelize')
 const { STRING, INTEGER, TEXT } = Sequelize
 const privateTypes = {
   Mobile: {
@@ -24,7 +24,11 @@ const privateTypes = {
     defaultValue: Sequelize.NOW, // 设置默认值为当前时间
   },
 }
-
+/*
+  所有表字段名使用小写，模型名称允许大小写
+  表字段不允许使用中划线 如 my-love 是非法的
+    可用下划线替代 如 my_love 是合法的
+*/
 module.exports = {
   // 文章表
   Article: {

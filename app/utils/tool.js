@@ -1,3 +1,6 @@
+/*
+  公共工具方法集合
+*/
 const fs = require('fs')
 const path = require('path')
 
@@ -73,7 +76,7 @@ const makeDir = (dirPath) => {
     })
   })
 }
-
+// 移动文件或文件夹方法
 const moveFile = (sourcePath, targetPath) => {
   return new Promise((resolve, reject) => {
     if (!isInRootPath(sourcePath) || !isInRootPath(targetPath)) {
@@ -96,6 +99,13 @@ const moveFile = (sourcePath, targetPath) => {
   })
 }
 
+// 对象键名转小写 （目前用于转化 url params 对象）
+const objKeyLower = (o) => {
+  const res = {}
+  for (const i in o) res[i.toLocaleLowerCase()] = o[i]
+  return res
+}
+
 module.exports = {
   toType,
   getJSFile,
@@ -103,4 +113,6 @@ module.exports = {
   fail,
   makeDir,
   moveFile,
+  objKeyLower,
+  verify: require('./verify'),
 }
