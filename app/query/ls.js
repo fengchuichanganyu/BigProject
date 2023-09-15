@@ -2,8 +2,7 @@
   分页数据查询方法 支持各种复杂查询条件，详情见文档
 */
 const { Op } = require('Sequelize')
-const sequelize = require(':@/model')
-const { models } = sequelize
+const { models } = require(':@/model')
 const { PAGE_SIZE } = require(':config')
 const { isNumer } = global.tool.verify
 // 从请求参数中找出非标准参数并输出为对象
@@ -104,6 +103,8 @@ module.exports = async (ctx, model, method, params) => {
     if (timeArr.filter((i) => !isNumer(i)).length) {
       ctx.throw(412, 'time参数只接受时间戳数字')
     }
+    // 如果 timeArrLen 等于 1，表示只提供了一个时间戳，那么将其解析为时间的起始时间戳，然后计算出结束时间戳。这段代码将一天的时间范围内的记录筛选出来
+    // 如果 timeArrLen 等于 2，表示提供了开始和结束时间戳，直接使用这两个时间戳作为时间范围。
     if (timeArrLen === 1) {
       const t = +timeArr[0]
       st = t - (t % 86400000)
