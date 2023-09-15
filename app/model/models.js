@@ -1,5 +1,5 @@
 const Sequelize = require('Sequelize')
-const { STRING, INTEGER, TEXT } = Sequelize
+const { STRING, INTEGER, TEXT, BIGINT } = Sequelize
 const privateTypes = {
   Mobile: {
     type: INTEGER,
@@ -20,8 +20,8 @@ const privateTypes = {
     },
   },
   Date: {
-    type: Sequelize.DATE, // 数据类型为日期/时间
-    defaultValue: Sequelize.NOW, // 设置默认值为当前时间
+    type: BIGINT,
+    defaultValue: () => +new Date(),
   },
 }
 /*

@@ -84,9 +84,9 @@ module.exports = async (ctx, model, method, params) => {
       let sortField = i
       if (i.substring(0, 1) === '-') {
         sortField = i.substring(1)
-        order.push([sortField, 'ASC'])
-      } else {
         order.push([sortField, 'DESC'])
+      } else {
+        order.push([sortField, 'ASC'])
       }
       if (!modelField.includes(sortField)) {
         ctx.throw(412, 'sort 排序参数包含非法字段')
@@ -140,19 +140,14 @@ module.exports = async (ctx, model, method, params) => {
       // console.log(args)
       // console.log(argArr)
       condition.where[fieldName] =
-        argArr.length === 1 ? args[i] : { [Op.in]: argArr } //
+        argArr.length === 1 ? args[i] : { [Op.in]: argArr } // 不仅而且
       // console.log(condition)
     } else {
       // 处理配置查询参数
       if (ArgHandle[argConf]) {
         const handleReq = ArgHandle[argConf](args[i])
-        // 如果有配置，但是condition中where初始值是空的，所以154行的代码中conField是空的
-        const argArr = args[i].split(',')
-
-        condition.where[fieldName] =
-          argArr.length === 1 ? args[i] : { [Op.in]: argArr }
         const condField = condition.where[fieldName]
-        console.log(handleReq, condField, condition, fieldName)
+        // console.log(condField, condition)
         /*
           查看该字段是否已有非标配置参数
             若有，则追加 and 条件
@@ -161,6 +156,7 @@ module.exports = async (ctx, model, method, params) => {
         condition.where[fieldName] = condField
           ? { [Op.and]: [condField, handleReq] }
           : handleReq
+        // console.log(condField, condition)
       } else {
         ctx.throw(412, i + ' 请求参数配置不被支持')
       }

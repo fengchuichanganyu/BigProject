@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('Sequelize')
 const { DB_CONN, DB_PREFIX } = require(':config')
 const models = require('./models')
 const sequelize = new Sequelize(DB_CONN)
