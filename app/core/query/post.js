@@ -8,8 +8,7 @@
     DATA:   [{...}, {...}, {...}, {...}]
 */
 
-const sequelize = require(':@/model')
-const { models } = sequelize
+const { models } = require(':@/model')
 const { toType } = global.tool
 module.exports = async (ctx, model, method, params) => {
   console.log(model, method, params)

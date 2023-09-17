@@ -31,7 +31,7 @@ module.exports = async (ctx, params, next) => {
   // 校验密码是否正确
   if (dbPw !== reqPw) ctx.throw(400, '用户名密码错误')
 
-  // 用户通过校验，此处需要增加一个用户 session 管理机制
+  // 用户通过校验
   const token = await makeToken(role, account)
   // setTimeout(async () => {
   //   console.log('222', token, await getToken(token))
