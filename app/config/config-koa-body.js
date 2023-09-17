@@ -1,21 +1,18 @@
-const path = require('path')
-
 const { makeDir } = global.tool
-
-const tempDir = path.resolve(process.cwd(), './tmp')
-makeDir(tempDir)
+const { TMP_DIR } = require(':config').APP_DIR
+makeDir(TMP_DIR)
 
 module.exports = {
   multipart: true,
   parsedMethods: ['POST', 'PUT', 'PATCH', 'GET', 'HEAD', 'DELETE'],
   formidable: {
-    uploadDir: tempDir,
+    uploadDir: TMP_DIR,
     hash: 'md5',
     maxFieldsSize: 2 * 1024 * 1024,
     maxFileSize: 2 * 1024 * 1024,
     onFileBegin(name, file) {
       global.tmpFileUrl = global.tmpFileUrl || 0
-      file.path = tempDir + '/upfile_' + global.tmpFileUrl
+      file.path = TMP_DIR + '/upfile_' + global.tmpFileUrl
       global.tmpFileUrl = global.tmpFileUrl >= 10 ? 0 : global.tmpFileUrl + 1
     },
     keepExtensions: false,

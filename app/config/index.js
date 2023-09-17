@@ -16,6 +16,13 @@ const KEY = {
   RSA_PRIVATE_KEY_PATH: path.resolve(__dirname, './key/rsa_private_key.pem'),
   RSA_PUBLIC_KEY_PATH: path.resolve(__dirname, './key/rsa_public_key.pem'),
 }
+
+// 系统目录设置
+const APP_DIR = {
+  TMP_DIR: path.resolve(process.cwd(), './tmp'),
+  LOG_DIR: path.resolve(process.cwd(), './log'),
+}
+
 // 数据库名称，用户名，密码
 const DB_NAME = 'BigProject'
 const DB_USERNAME = 'gyl'
@@ -32,4 +39,5 @@ module.exports = {
   PAGE_SIZE,
   PERMISSION,
   KEY,
+  APP_DIR,
 }

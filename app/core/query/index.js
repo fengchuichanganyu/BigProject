@@ -10,6 +10,7 @@ const put = require('./put')
 const del = require('./del')
 
 const getList = async (model, params) => {
+  console.log(model, params)
   const res = await ls({}, model, '', params)
   return res
 }
@@ -18,7 +19,7 @@ const getItem = async (model, params) => {
   if (toType(params) === 'object') {
     const res = await getList(model, params)
     if (res.list.length) {
-      return res.list[0].dataValues
+      return res.list[0]
     } else {
       return null
     }

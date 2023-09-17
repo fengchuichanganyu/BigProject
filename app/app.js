@@ -36,7 +36,7 @@ const app = new Koa()
 app.use(koaError)
 app.use(accessLogger())
 
-app.use(staticFiles(path.resolve(__dirname, '../static')))
+app.use(staticFiles(path.resolve(process.cwd(), '../static')))
 app.use(koaBody(configKoaBody))
 app.use(koaJson({ pretty: false, param: 'pretty' }))
 app.use(router.routes())

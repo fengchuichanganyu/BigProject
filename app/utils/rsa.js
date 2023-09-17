@@ -8,22 +8,26 @@ const encrypt = (str) => {
     fs.readFile(RSA_PUBLIC_KEY_PATH, (err, data) => {
       if (err) reject(new Error(err))
       const Rsa = new NodeRSA(data)
-      resolve(Rsa.encrypt(str, 'base64'))
+      Rsa.setOptions({ encryptionScheme: 'pkcs1' })
+      const password = Rsa.encrypt(str, 'base64')
+      resolve(password)
     })
   })
 }
+
 // 私钥解密方法
 const decrypt = (str) => {
-  console.log(str)
+  // console.log(str)
   return new Promise((resolve, reject) => {
     fs.readFile(RSA_PRIVATE_KEY_PATH, (err, data) => {
       if (err) reject(new Error(err))
       const Rsa = new NodeRSA(data)
+      Rsa.setOptions({ encryptionScheme: 'pkcs1' })
       try {
-        const res = Rsa.decrypt(str, 'utf-8')
+        const res = Rsa.decrypt(str, 'utf8')
         resolve(res)
       } catch (e) {
-        reject(new Error(e))
+        reject(e.message)
       }
     })
   })
