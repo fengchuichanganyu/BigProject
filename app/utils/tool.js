@@ -115,4 +115,5 @@ module.exports = {
   moveFile,
   objKeyLower,
   verify: require('./verify'),
+  rsa: require('./rsa'),
 }

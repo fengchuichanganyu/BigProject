@@ -1,4 +1,3 @@
-const { logger } = global.tool
 const DB_CONN = {
   host: '47.96.156.243', // MySQL 服务器主机名
   dialect: 'mysql', // 使用 MySQL 数据库
@@ -14,7 +13,7 @@ const DB_CONN = {
   },
   query: { raw: true },
   logging: function (sql) {
-    logger.info(sql)
+    // console.log(sql)
   },
 }
 

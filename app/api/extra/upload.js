@@ -72,7 +72,7 @@ const saveFile = (ctx, file) => {
   })
 }
 
-module.exports = async (ctx, next) => {
+module.exports = async (ctx, params, next) => {
   const { files, type } = ctx.request
   // console.log(ctx.request)
   // console.log(files, type)
