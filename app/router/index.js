@@ -65,7 +65,7 @@ router.all(API_PREFIX + '*', async (ctx, next) => {
   // console.log(reqMethod, reqApiName, reqId, RESTFulModel)
   // 请求鉴权，并返回角色名称
   const roleName = Authentication(ctx, reqApiName, reqMethod)
-  // console.log(roleName)
+  console.log(roleName)
   // 根据请求方法整理参数
   const reqParams =
     reqMethod === 'ls' ? objKeyLower(ctx.request.query) : ctx.request.body
