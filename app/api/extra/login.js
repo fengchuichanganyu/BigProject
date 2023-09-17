@@ -17,12 +17,10 @@ module.exports = async (ctx, params, next) => {
   const reqPw = await rsa
     .decrypt(req)
     .catch((e) => ctx.throw(400, '无法解密，请检查公钥是否正确'))
-  // console.log(reqPw)
   // 从数据库存储用户信息，根据不同角色，从不同表内读取
   const dbUser = await getItem(role === 'admin' ? 'Manages' : 'Editor', {
     account,
   })
-  // console.log(dbUser)
   // 校验传入用户名是否存在
   if (!dbUser) ctx.throw(400, '找不到该用户')
   const dbPw = await rsa

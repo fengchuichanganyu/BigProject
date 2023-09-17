@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
-const { readTextFile, deleteFile } = global.tool
+const { readTextFile, deleteFile, makeDir } = global.tool
 const { TMP_DIR } = require(':config').APP_DIR
 
 /*
@@ -24,11 +24,12 @@ const setToken = async (role, account, token, time) => {
       }
     },
     async file() {
-      const filename = `session_||${token}`
+      const filename = `session_${token}`
       const filePath = path.resolve(TMP_DIR, filename)
       const fileContent = `${role}||${account}||${token}||${time}`
+      makeDir(filePath)
       await fs.writeFile(filePath, fileContent, (err) => {
-        if (err) return new Error('session 文件写入失败')
+        if (err) console.log('写入文件出错')
       })
     },
   }
@@ -43,9 +44,10 @@ const getToken = async (token) => {
       return global.session[token]
     },
     async file() {
-      const filename = `session_||${token}`
+      const filename = `session_${token}`
       const filePath = path.resolve(TMP_DIR, filename)
       const data = await readTextFile(filePath).catch(() => false)
+
       if (data) {
         const [role, account, token, time] = data.split('||')
         return { role, account, token, time }
@@ -64,8 +66,9 @@ const removeToken = async (token) => {
       delete global.session[token]
     },
     async file() {
-      const filename = `session_||${token}`
+      const filename = `session_${token}`
       const filePath = path.resolve(TMP_DIR, filename)
+      console.log(filePath)
       const res = await deleteFile(filePath).catch(() => false)
       console.log('删除文件', res)
     },

@@ -35,7 +35,6 @@ const RESTFulModel = (() => {
 */
 const calcMethodAndCheckUrl = (reqApiName, reqId, ctx) => {
   const { method } = ctx.request
-  // console.log(ctx.request)
   let reqMethod = method.toLocaleLowerCase()
   if (reqId) {
     if (method === 'POST') ctx.throw(405)
@@ -54,18 +53,15 @@ const router = new Router()
 router.all(API_PREFIX + '*', async (ctx, next) => {
   // 根据请求 path 获取请求 apiname 以及请求 id，并判断 path 是否合法
   const reqPath = ctx.request.path.replace(new RegExp(API_PREFIX), '')
-  // console.log(reqPath)
   const [reqApiName, reqId, errPath] = reqPath
     .split('/')
     .map((i) => i.toLocaleLowerCase())
-  // console.log(reqApiName, reqId, errPath)
   if (errPath) ctx.throw(400, '请求路径不支持')
   // 根据请求计算内置请求方法
   const reqMethod = calcMethodAndCheckUrl(reqApiName, reqId, ctx)
-  // console.log(reqMethod, reqApiName, reqId, RESTFulModel)
   // 请求鉴权，并返回角色名称
   const roleName = await Authentication(ctx, reqApiName, reqMethod)
-  // console.log(roleName)
+  console.log(roleName)
   // 根据请求方法整理参数
   const reqParams =
     reqMethod === 'ls' ? objKeyLower(ctx.request.query) : ctx.request.body

@@ -5,22 +5,15 @@ module.exports = async (ctx, apiName, method) => {
   // 同时支持 header 中和 cookies 中读取 token
   const token = ctx.header.token || ctx.cookies.get('token') || ''
   const tokenCheckRes = await checkToken(token)
+  // console.log(apiName, method, token, tokenCheckRes)
+
   const reqRoleName = tokenCheckRes ? tokenCheckRes.role : ''
   const roleName = ['editor', 'admin'].includes(reqRoleName)
     ? reqRoleName
     : 'anyone'
   // 从权限配置名单中，读取对应接口的权限配置
   const apiPerm = PERMISSION[apiName]
-  // console.log(
-  //   ctx.header.token,
-  //   'xxxx',
-  //   reqRoleName,
-  //   'xxx',
-  //   roleName,
-  //   'xxxxx',
-  //   apiName,
-  //   apiPerm
-  // )
+  // console.log(reqRoleName, 'xxx', roleName, 'xxxxx', apiName, apiPerm)
 
   if (apiPerm) {
     const apiRolePerm = apiPerm[roleName]
