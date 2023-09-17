@@ -14,7 +14,7 @@ const encrypt = (str) => {
 }
 // 私钥解密方法
 const decrypt = (str) => {
-  // console.log(str)
+  console.log(str)
   return new Promise((resolve, reject) => {
     fs.readFile(RSA_PRIVATE_KEY_PATH, (err, data) => {
       if (err) reject(new Error(err))

@@ -1,4 +1,4 @@
-const query = require('../query')
+const query = require('./query')
 const { succ, getJSFile } = global.tool
 const beforeHandle = getJSFile('../api/restful/before')
 const afterHandle = getJSFile('../api/restful/after')

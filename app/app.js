@@ -12,6 +12,7 @@ bestRequire(process.cwd(), {
   config: ':@/config',
   utils: ':@/utils',
   core: ':@/core',
+  query: ':core/query',
 })
 
 // 将工具函数挂载到全局

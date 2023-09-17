@@ -6,16 +6,16 @@ module.exports = (ctx, apiName, method) => {
     : 'anyone'
 
   const apiPerm = PERMISSION[apiName]
-  console.log(
-    ctx.header.token,
-    'xxxx',
-    reqRoleName,
-    'xxx',
-    roleName,
-    'xxxxx',
-    apiName,
-    apiPerm
-  )
+  // console.log(
+  //   ctx.header.token,
+  //   'xxxx',
+  //   reqRoleName,
+  //   'xxx',
+  //   roleName,
+  //   'xxxxx',
+  //   apiName,
+  //   apiPerm
+  // )
 
   if (apiPerm) {
     const apiRolePerm = apiPerm[roleName]
