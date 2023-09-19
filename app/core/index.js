@@ -28,7 +28,7 @@ module.exports = async (
   // console.log(data)
   // 如有后处理，对查询结果进行处理
   if (afterHandle.includes(name)) {
-    const handle = require(':@/api/restful/before/' + name)[method]
+    const handle = require(':@/api/restful/after/' + name)[method]
     if (handle) data = handle(data, roleName, ctx)
   }
   ctx.body = succ(data)

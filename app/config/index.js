@@ -24,7 +24,7 @@ const KEY = {
   有更高要求，可参考 memory 写法，增加 redis 数据库
     代码在 /app/core/session.js
 */
-const SESSION_TYPE = 'memory'
+const SESSION_TYPE = 'file'
 
 // 系统目录设置
 const APP_DIR = {
