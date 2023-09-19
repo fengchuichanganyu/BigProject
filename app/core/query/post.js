@@ -11,7 +11,7 @@
 const { models } = require(':@/model')
 const { toType } = global.tool
 module.exports = async (ctx, model, method, params) => {
-  console.log(model, method, params)
+  // console.log(model, method, params)
   // 如果是单条数据，则转化为多条数据，共用后续处理
   if (toType(params) === 'object') params = [params]
   // 数据基本格式校验

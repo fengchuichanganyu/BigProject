@@ -51,7 +51,7 @@ const ArgHandle = {
 }
 
 module.exports = async (ctx, model, method, params) => {
-  // console.log(model, method, params)
+  console.log(model, method, params)
   const { pagesize = PAGE_SIZE, page = 0, time } = params
   model = models[model]
   const modelField = Object.keys(model.rawAttributes)
@@ -137,7 +137,7 @@ module.exports = async (ctx, model, method, params) => {
         支持 a=1,2,3,4,5 多个相等条件查询
           会被解析为 in 查询
       */
-      const argArr = args[i].split(',')
+      const argArr = (args[i] || '').split(',')
       // console.log(args)
       // console.log(argArr)
       condition.where[fieldName] =
