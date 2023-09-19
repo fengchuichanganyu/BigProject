@@ -3,6 +3,7 @@
 */
 const { toType } = global.tool
 
+const { IS_POST_TEST_DB } = require(':config')
 const ls = require('./ls')
 const post = require('./post')
 const get = require('./get')
@@ -11,7 +12,7 @@ const del = require('./del')
 
 // 系统内部查询数据列表方法
 const getList = async (model, params) => {
-  console.log(model, params)
+  // console.log(model, params)
   const res = await ls({}, model, '', params)
   return res
 }
@@ -43,7 +44,7 @@ const initDb = async () => {
     postItem('Manages', {
       account: 'admin',
       password:
-        'QoXr/TKaWtreOTUp7+hUIafOmRYXge7usf8RCvvE745OeaAjVg50Dgg3k+i1xFfvIPcFY4Boifzd7TKcPjzzhw==',
+        'icOP+4brHKCs7rZoXcn//2T+8fKLJaP+vZgNjz1m7BMwqetle6vY5vhtPtddqhU2o2MXDUhP+hix4CGlxQTaTjbYWH5SwOZzvcU3ZzbDmvfSRjz8e7jcRsl9oL+HXQOPreXFHuvjV6x4vXX8Mhtv4GiSHewRE2ds7reeUOTY+rE=',
     }).then(() => {
       console.log('初始管理员账号添加完成 admin:123456')
     })
@@ -56,12 +57,28 @@ const initDb = async () => {
       keywords: 'RESTFul,CMS,koa',
       copyright: 'By FungLeo',
     }).then(() => {
-      console.log('初始系统信息完成')
+      console.log('初始系统信息数据完成')
+    })
+  }
+  const hasChan = await getItem('Channel', 'first')
+  if (!hasChan) {
+    const calcchannelMockDat = (pid, pre = '顶级') => {
+      return 'leo'.split('').map((i, index) => {
+        return { pid, name: `${pre}栏目${pid}${index}` }
+      })
+    }
+    const { ids } = await postItem('Channel', calcchannelMockDat(0))
+    ids.forEach(async (i) => {
+      const { ids } = await postItem('Channel', calcchannelMockDat(i, '二级'))
+      ids.forEach(async (i) => {
+        await postItem('Channel', calcchannelMockDat(i, '三级'))
+        console.log('初始测试栏目数据完成')
+      })
     })
   }
 }
 // 初始化空数据时添加默认数据
-initDb()
+IS_POST_TEST_DB && initDb()
 
 module.exports = {
   getList,

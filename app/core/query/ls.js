@@ -115,7 +115,7 @@ module.exports = async (ctx, model, method, params) => {
     }
     condition.where.time = {
       [Op.gte]: st,
-      [Op.lt]: et,
+      [Op.lte]: et,
     }
   }
   // 处理非标参数

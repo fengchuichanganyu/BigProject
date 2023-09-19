@@ -23,6 +23,9 @@ const APP_DIR = {
   LOG_DIR: path.resolve(process.cwd(), './log'),
 }
 
+// 初始化数据库时是否添加测试数据
+const IS_POST_TEST_DB = true
+
 // 数据库名称，用户名，密码
 const DB_NAME = 'BigProject'
 const DB_USERNAME = 'gyl'
@@ -40,4 +43,5 @@ module.exports = {
   PERMISSION,
   KEY,
   APP_DIR,
+  IS_POST_TEST_DB,
 }

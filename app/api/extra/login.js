@@ -12,7 +12,7 @@ module.exports = async (ctx, params, next) => {
   const req = await rsa
     .encrypt(password)
     .catch((e) => ctx.throw(400, '无法加密，请检查私钥是否正确'))
-  // console.log(req)
+  console.log(req)
   // 校验传入密码是否能解密，如能解密则赋值 reqPw
   const reqPw = await rsa
     .decrypt(req)
@@ -23,6 +23,7 @@ module.exports = async (ctx, params, next) => {
   })
   // 校验传入用户名是否存在
   if (!dbUser) ctx.throw(400, '找不到该用户')
+  // console.log(dbUser.password)
   const dbPw = await rsa
     .decrypt(dbUser.password)
     .catch((e) => ctx.throw(500, '用户密码存在异常'))
