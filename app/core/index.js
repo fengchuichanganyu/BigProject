@@ -19,7 +19,7 @@ module.exports = async (
   if (beforeHandle.includes(name)) {
     // handle就是name里的method方法
     const handle = require(':@/api/restful/before/' + name)[method]
-    if (handle) params = handle(params, roleName, ctx, id)
+    if (handle) params = await handle(params, roleName, ctx, id)
     // console.log(params)
   }
   // 进入数据库查询
@@ -29,7 +29,7 @@ module.exports = async (
   // 如有后处理，对查询结果进行处理
   if (afterHandle.includes(name)) {
     const handle = require(':@/api/restful/after/' + name)[method]
-    if (handle) data = handle(data, roleName, ctx)
+    if (handle) data = await handle(data, roleName, ctx)
   }
   ctx.body = succ(data)
 }
