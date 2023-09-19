@@ -22,7 +22,7 @@ module.exports = async (
     if (handle) params = await handle(params, roleName, ctx, id)
     // console.log(params)
   }
-  // 进入数据库查询
+  // 进入数据库操作
   let data = await query[method](ctx, model, method, params, id)
 
   // console.log(data)

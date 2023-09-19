@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const { toType, succ, makeDir, moveFile } = global.tool
+const { toType, succ, makeDir, moveFile, sleep } = global.tool
 const calcFileExt = (path) => {
   let fileBuffer = fs.readFileSync(path)
   // console.log(fileBuffer)
@@ -84,7 +84,8 @@ module.exports = async (ctx, params, roleName, next) => {
     ctx.throw(400, '上传文件不能为空！')
   }
   const fileType = toType(file)
-  // console.log(fileType)
+  // 模拟上传延时
+  await sleep(500)
   if (fileType === 'object') {
     const imgUrl = await saveFile(ctx, file)
     ctx.body = succ({ path: imgUrl })
