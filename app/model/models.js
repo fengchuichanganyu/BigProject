@@ -23,6 +23,14 @@ const privateTypes = {
     type: BIGINT,
     defaultValue: () => +new Date(),
   },
+  Zero: {
+    type: INTEGER,
+    defaultValue: 0,
+  },
+  Status: {
+    type: STRING,
+    defaultValue: 'NORMAL',
+  },
 }
 /*
   所有表字段名使用小写，模型名称允许大小写
@@ -42,15 +50,15 @@ module.exports = {
     author: STRING, // 文章作者
     origin: STRING, // 文章来源
     editor: STRING, // 文章编辑
-    hits: INTEGER, // 文章点击热度
-    isdelete: STRING, // 文章是否删除
+    hits: privateTypes.Zero, // 文章点击热度
+    status: privateTypes.Status, // 文章状态
     time: privateTypes.Date,
   },
   // 文章栏目
   Channel: {
     pid: INTEGER, // 归属父ID
     name: STRING, // 栏目名称
-    sort: INTEGER, // 栏目排序
+    sort: privateTypes.Zero, // 栏目排序
     keywords: STRING, // 栏目关键词
     description: TEXT, // 栏目描述
     time: privateTypes.Date,
@@ -111,7 +119,7 @@ module.exports = {
   Tags: {
     tag: STRING,
     channel_id: INTEGER,
-    hits: INTEGER,
+    hits: privateTypes.Zero,
     time: privateTypes.Date,
   },
 }

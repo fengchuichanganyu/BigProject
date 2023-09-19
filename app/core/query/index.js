@@ -77,8 +77,7 @@ const initDb = async () => {
   }
 }
 // 初始化空数据时添加默认数据
-IS_POST_TEST_DB && initDb()
-
+IS_POST_TEST_DB && setTimeout(() => initDb(), 2000)
 module.exports = {
   getList,
   getItem,
