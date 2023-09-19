@@ -2,15 +2,14 @@ const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const { readTextFile, deleteFile, makeDir } = global.tool
-const { TMP_DIR } = require(':config').APP_DIR
-
+const { SESSION_TYPE = 'memory', APP_DIR } = require(':config')
+const { TMP_DIR } = APP_DIR
 /*
   session type 支持 memory 内存存储 和 file 文件存储
   除非是在开发阶段 否则推荐 memory 存储
   因为 file 存储的 session 文件不会自动删除，会越来越多
   有更高要求，可参考 memory 写法，增加 redis 数据库
 */
-const SESSION_TYPE = 'file'
 
 // 存储 token
 const setToken = async (role, account, token, time) => {
