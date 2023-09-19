@@ -1,10 +1,10 @@
 const { toType } = require('../../../utils/tool')
 
 module.exports = {
-  ls(params, ctx) {
+  ls(params, role, ctx) {
     return params
   },
-  post(params, ctx) {
+  post(params, role, ctx) {
     // console.log(toType(params))
     if (toType(params) === 'object') params = [params]
     // console.log(toType(params))
@@ -20,13 +20,13 @@ module.exports = {
     // }
     return params
   },
-  get(params, ctx, id) {
+  get(params, role, ctx, id) {
     return params
   },
-  put(params, ctx, id) {
+  put(params, role, ctx, id) {
     return params
   },
-  del(params, ctx, id) {
+  del(params, role, ctx, id) {
     return params
   },
 }

@@ -1,7 +1,7 @@
 const { succ, rsa } = global.tool
 const { getItem } = require(':query')
 const { makeToken } = require(':core/session')
-module.exports = async (ctx, params, next) => {
+module.exports = async (ctx, params, roleName, next) => {
   const { account, password, role } = params
 
   // 校验传参是否为空
